@@ -9,8 +9,8 @@ const options = {
       description: 'API RESTful para gestión de gimnasio — usuarios, membresías, rutinas y clases.',
     },
     servers: [
+      { url: 'https://backend-gym-9t3p.onrender.com', description: 'Producción (Render)' },
       { url: 'http://localhost:3000', description: 'Local' },
-      { url: 'https://gym-backend-latest.onrender.com', description: 'Producción (Render)' },
     ],
     components: {
       securitySchemes: {
@@ -22,7 +22,6 @@ const options = {
         },
       },
       schemas: {
-        // ─── AUTH ────────────────────────────────────────────
         RegisterInput: {
           type: 'object',
           required: ['name', 'email', 'password'],
@@ -57,7 +56,6 @@ const options = {
             },
           },
         },
-        // ─── USER ────────────────────────────────────────────
         UserInput: {
           type: 'object',
           required: ['name', 'email', 'password'],
@@ -80,7 +78,6 @@ const options = {
             createdAt: { type: 'string', format: 'date-time' },
           },
         },
-        // ─── MEMBERSHIP ──────────────────────────────────────
         MembershipInput: {
           type: 'object',
           required: ['user', 'type', 'endDate', 'price'],
@@ -105,7 +102,6 @@ const options = {
             price:     { type: 'number' },
           },
         },
-        // ─── ROUTINE ─────────────────────────────────────────
         Exercise: {
           type: 'object',
           properties: {
@@ -138,7 +134,6 @@ const options = {
             createdAt:   { type: 'string', format: 'date-time' },
           },
         },
-        // ─── CLASS ───────────────────────────────────────────
         ClassInput: {
           type: 'object',
           required: ['name', 'trainer', 'schedule', 'capacity'],
@@ -162,7 +157,6 @@ const options = {
             enrolled: { type: 'array', items: { $ref: '#/components/schemas/User' } },
           },
         },
-        // ─── GENERICS ────────────────────────────────────────
         Error: {
           type: 'object',
           properties: { error: { type: 'string', example: 'Mensaje de error' } },
@@ -173,7 +167,6 @@ const options = {
         },
       },
     },
-    // seguridad global por defecto para todos los endpoints protegidos
     security: [{ bearerAuth: [] }],
   },
   apis: ['./src/routes/*.js'],
